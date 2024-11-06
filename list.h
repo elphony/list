@@ -21,5 +21,7 @@ void list_insert_start(list* list, ListElem_t value);
 void list_insert_end(list* list, ListElem_t value);
 void list_delete_index(list* list, int index);
 void list_dump(list* list);
+void list_delete_start(list* list);
+void list_delete_end(list* list);
 
 #endif
