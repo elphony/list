@@ -13,7 +13,9 @@ int main() {
     list_insert_after(&list, 1, 20);
     list_insert_after(&list, 1, 15);
     list_insert_start(&list, 5);
-    list_delete_index(&list, 1);
+
+    int a = find_elem_by_index(&list, 3);
+    printf("%d\n", a);
 
     create_html(&list);
 

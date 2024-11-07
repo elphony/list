@@ -23,5 +23,7 @@ void list_delete_index(list* list, int index);
 void list_dump(list* list);
 void list_delete_start(list* list);
 void list_delete_end(list* list);
+int find_elem_by_value(list* list, ListElem_t value);
+ListElem_t find_elem_by_index(list* list, int index);
 
 #endif

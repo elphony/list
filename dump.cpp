@@ -46,10 +46,9 @@ void create_dump(list* list, const char* file, int line, const char* func) {
     fprintf(dump, "}\n");
     fclose(dump);
     
-    char* command = (char*)calloc(MAX_SIZE_OF_COMMAND, sizeof(char));
+    char command[MAX_SIZE_OF_COMMAND] = {};
     sprintf(command, "dot -Tpng dump/dump.dot -o dump/dump%d.png", count_dump());
     system(command);
-    free(command);
 }
 
 int count_dump() {

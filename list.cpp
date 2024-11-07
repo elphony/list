@@ -7,7 +7,6 @@
 
 #define LIST_DUMP(stk) create_dump(list, __FILE__, __LINE__, __FUNCTION__) 
 
-
 void list_ctor(list* list, int size) {
 
     if (!list) assert(0 && "Null pointer to list");
@@ -33,7 +32,7 @@ void list_ctor(list* list, int size) {
     list->size = size;
     list->free = 1;
 
-    LIST_DUMP(&list);
+    LIST_DUMP(list);
 }
 
 void list_dtor(list* list) {
@@ -63,7 +62,7 @@ void list_insert_after(list* list, int index, ListElem_t value) {
     list->prev[new_index] = list->prev[old_index];
     list->prev[old_index] = new_index;
 
-    LIST_DUMP(&list);
+    LIST_DUMP(list);
 }
 
 void list_insert_before(list* list, int index, ListElem_t value) {
@@ -95,7 +94,7 @@ void list_delete_index(list* list, int index) {
     list->prev[index] = -1;
     list->free = index;
 
-    LIST_DUMP(&list);
+    LIST_DUMP(list);
 }
 
 void list_delete_start(list* list) {
@@ -122,4 +121,41 @@ void list_dump(list* list) {
         fprintf(stderr, "\t[%d] = %d\n", i, list->value[i]);
         i = list->next[i];
     }
+}
+
+int find_elem_by_value(list* list, ListElem_t value) {
+
+    LIST_DUMP(list);
+
+    int index = -1;
+
+    for (int i = list->next[0]; i != 0; i = list->next[i]) {
+        if (list->value[i] == value) {
+            index = i;
+            break;
+        }
+    }
+
+    LIST_DUMP(list);
+
+    return index;
+}
+
+ListElem_t find_elem_by_index(list* list, int index) {
+
+    LIST_DUMP(list);
+
+    int i = list->next[0];
+
+    for (int count = 0; count < index; ++count) {
+        if (i == 0) {
+            fprintf(stderr, "ERROR: index out of range\n");
+            return POISON;
+        }
+        i = list->next[i];
+    }
+
+    LIST_DUMP(list);
+
+    return list->value[i];
 }
